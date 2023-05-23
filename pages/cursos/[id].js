@@ -2,6 +2,7 @@ import Pagina from '@/components/Pagina'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
@@ -9,14 +10,26 @@ import { HiArrowNarrowLeft } from 'react-icons/hi'
 
 const form = () => {
 
-    const { register, handleSubmit } = useForm()
-    const router = useRouter()
+    const { push, query } = useRouter()
+    const { register, handleSubmit, setValue } = useForm()
+
+    useEffect(() => {
+
+        if (query.id) {
+            const cursos = JSON.parse(window.localStorage.getItem('cursos'))
+            const curso = cursos[query.id]
+
+            for (let atributo in curso) {
+                setValue(atributo, curso[atributo])
+            }
+        }
+    }, [query.id])
 
     function salvar(dados) {
         const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
         cursos.push(dados)
         window.localStorage.setItem('cursos', JSON.stringify(cursos))
-        router.push('/cursos/')
+        push('/cursos/')
     }
 
     return (
@@ -40,13 +53,13 @@ const form = () => {
                 <div className='text-center'>
                     <Link href='/cursos/' className='me-3'>
                         <Button variant="success" onClick={handleSubmit(salvar)}>
-                            <HiCheck/>
+                            <HiCheck />
                             Salvar
                         </Button>
                     </Link>
                     <Link href='/cursos/'>
                         <Button variant='danger'>
-                            <HiArrowNarrowLeft/>
+                            <HiArrowNarrowLeft />
                             Voltar
                         </Button>
                     </Link>

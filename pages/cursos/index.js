@@ -3,28 +3,32 @@ import React, { use, useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsTrash3Fill } from 'react-icons/bs'
+import { BiEditAlt } from 'react-icons/bi'
+import Link from 'next/link'
+
 
 const index = () => {
-  
+
   const [cursos, setCursos] = useState([])
 
   useEffect(() => {
     setCursos(getAll())
   }, [])
 
-  function getAll(){
+  function getAll() {
     return JSON.parse(window.localStorage.getItem('cursos')) || []
   }
 
-  function excluir(id){
-    const itens = getAll()
-    console.log(itens)
-    itens.splice(id, 1)
-    console.log(itens)
-    window.localStorage.setItem('cursos', JSON.stringify(cursos))
-    setCursos(itens)
+  function excluir(id) {
+    if (confirm('Deseja realmente excluir o registro')) {
+      const itens = getAll()
+      console.log(itens)
+      itens.splice(id, 1)
+      console.log(itens)
+      window.localStorage.setItem('cursos', JSON.stringify(cursos))
+      setCursos(itens)
+    }
   }
-
 
   return (
     <Pagina titulo='Cursos'>
@@ -41,9 +45,15 @@ const index = () => {
           </tr>
         </thead>
         <tbody>
-          {cursos.map((item,lista) => (
+          {cursos.map((item, lista) => (
             <tr key={lista}>
-              <td><BsTrash3Fill onClick={()=>excluir(lista)} className='text-danger'/></td>
+              <td>
+                <Link href={'/cursos/' + lista}>
+                  <BiEditAlt className='me-3' style={{ cursor: 'pointer' }} />
+                </Link>
+                <BsTrash3Fill style={{ cursor: 'pointer' }}
+                  onClick={() => excluir(lista)} className='text-danger' />
+              </td>
               <td>{item.nome}</td>
               <td>{item.duracao}</td>
               <td>{item.modalidade}</td>

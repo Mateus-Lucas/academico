@@ -1,10 +1,11 @@
 import Pagina from '@/components/Pagina'
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsTrash3Fill } from 'react-icons/bs'
 import { BiEditAlt } from 'react-icons/bi'
 import Link from 'next/link'
+import axios from 'axios'
 
 
 const index = () => {
@@ -12,7 +13,20 @@ const index = () => {
   const [disciplinas, setDisciplinas] = useState([])
 
   useEffect(() => {
+    axios.get('/api/disciplinas').then(resultado => {
+      setDisciplinas(resultado.data);
+    })
   }, [])
+
+  function getAll(){
+    axios.get('/api/disciplinas').then(resultado => {
+      setDisciplinas(resultado.data);
+  })}
+
+  function excluir(id){
+    axios.delete('/api/disciplinas/' + id)
+    getAll()
+  }
 
 
   return (
@@ -24,23 +38,22 @@ const index = () => {
         <thead>
           <tr>
             <th>Opções</th>
-            <th>Disciplina</th>
+            <th>Nome</th>
             <th>Duração</th>
           </tr>
         </thead>
         <tbody>
-          {disciplinas.map((item, lista) => (
-            <tr key={lista}>
+          {disciplinas.map(item => (
+            <tr key={item.id}>
               <td>
-                <Link href={'/disciplinas/' + lista}>
+                <Link href={'/disciplinas/' + item.id}>
                   <BiEditAlt className='me-3' style={{ disciplinar: 'pointer' }} />
                 </Link>
                 <BsTrash3Fill style={{ disciplinar: 'pointer' }}
-                  onClick={() => excluir(lista)} className='text-danger' />
+                  onClick={() => excluir(item.id)} className='text-danger' />
               </td>
-              <td>{item.nome}</td>
+              <td>{item.id}</td>
               <td>{item.duracao}</td>
-              <td>{item.modalidade}</td>
             </tr>
           ))}
         </tbody>

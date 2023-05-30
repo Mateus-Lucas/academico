@@ -30,6 +30,8 @@ const index = () => {
     }
   }
 
+  console.log(cursos);
+
   return (
     <Pagina titulo='Cursos'>
       <Button href='/cursos/form' className='mb-2' variant="primary">Novo

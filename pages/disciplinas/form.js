@@ -11,14 +11,13 @@ import { HiArrowNarrowLeft } from 'react-icons/hi'
 const form = () => {
 
     const { register, handleSubmit } = useForm()
-    const router = useRouter()
+    const { push } = useRouter()
 
     function salvar(dados) {
 
-        axios.post('/api/disciplinas')
-        
-        console.log(dados);
-        
+        axios.post('/api/disciplinas', dados)
+        push('/disciplinas')
+
     }
 
     return (
@@ -29,9 +28,9 @@ const form = () => {
                     <Form.Control type="text" {...register('nome')} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId='curso'>
+                <Form.Group className="mb-3" controlId='duracao'>
                     <Form.Label >Duração: </Form.Label>
-                    <Form.Control type="text" {...register('curso')} />
+                    <Form.Control type="text" {...register('duracao')} />
                 </Form.Group>
 
                 <div className='text-center'>

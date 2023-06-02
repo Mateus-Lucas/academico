@@ -3,6 +3,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
@@ -10,18 +11,30 @@ import { HiArrowNarrowLeft } from 'react-icons/hi'
 
 const form = () => {
 
-    const { register, handleSubmit } = useForm()
-    const { push } = useRouter()
+    const { push, query } = useRouter()
+    const { register, handleSubmit, setValue } = useForm()
 
-    function salvar(dados) {
+    useEffect(() => {
+        if (query.id) {
 
-        axios.post('/api/professores', dados)
-        push('/professores')
+            axios.get('/api/alunos/' + query.id).then(resultado => {
+                const aluno = resultado.data
 
+                for (let atributo in aluno) {
+                    setValue(atributo, aluno[atributo])
+                }
+            })
+
+        }
+    }, [query.id])
+
+    function alterar(dados) {
+        axios.put('/api/alunos/' + query.id, dados)
+        push('/alunos')
     }
 
     return (
-        <Pagina titulo='Professores'>
+        <Pagina titulo='alunos'>
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
@@ -78,13 +91,13 @@ const form = () => {
                 </Form.Group>
 
                 <div className='text-center'>
-                    <Link href='/professores/' className='me-3'>
-                        <Button variant="success" onClick={handleSubmit(salvar)}>
+                    <Link href='/alunos/' className='me-3'>
+                        <Button variant="success" onClick={handleSubmit(alterar)}>
                             <HiCheck/>
-                            Salvar
+                            Alterar
                         </Button>
                     </Link>
-                    <Link href='/professores/'>
+                    <Link href='/alunos/'>
                         <Button variant='danger'>
                             <HiArrowNarrowLeft/>
                             Voltar

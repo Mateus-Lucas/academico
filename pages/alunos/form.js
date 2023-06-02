@@ -15,13 +15,13 @@ const form = () => {
 
     function salvar(dados) {
 
-        axios.post('/api/professores', dados)
-        push('/professores')
+        axios.post('/api/alunos', dados)
+        push('/alunos')
 
     }
 
     return (
-        <Pagina titulo='Professores'>
+        <Pagina titulo='alunos'>
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
@@ -36,10 +36,6 @@ const form = () => {
                 <Form.Group className="mb-3" controlId='matricula'>
                     <Form.Label >Matrícula: </Form.Label>
                     <Form.Control type="text" {...register('matricula')} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId='salario'>
-                    <Form.Label >Salário: </Form.Label>
-                    <Form.Control type="text" {...register('salario')} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='email'>
@@ -78,13 +74,13 @@ const form = () => {
                 </Form.Group>
 
                 <div className='text-center'>
-                    <Link href='/professores/' className='me-3'>
+                    <Link href='/alunos/' className='me-3'>
                         <Button variant="success" onClick={handleSubmit(salvar)}>
                             <HiCheck/>
                             Salvar
                         </Button>
                     </Link>
-                    <Link href='/professores/'>
+                    <Link href='/alunos/'>
                         <Button variant='danger'>
                             <HiArrowNarrowLeft/>
                             Voltar

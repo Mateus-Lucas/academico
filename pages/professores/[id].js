@@ -17,11 +17,11 @@ const form = () => {
     useEffect(() => {
         if (query.id) {
 
-            axios.get('/api/disciplinas/' + query.id).then(resultado => {
-                const disciplina = resultado.data
+            axios.get('/api/professores/' + query.id).then(resultado => {
+                const aluno = resultado.data
 
-                for (let atributo in disciplina) {
-                    setValue(atributo, disciplina[atributo])
+                for (let atributo in aluno) {
+                    setValue(atributo, aluno[atributo])
                 }
             })
 
@@ -29,37 +29,82 @@ const form = () => {
     }, [query.id])
 
     function alterar(dados) {
-        axios.put('/api/disciplinas/' + query.id, dados)
-        push('/disciplinas')
+        axios.put('/api/professores/' + query.id, dados)
+        push('/professores')
     }
 
     return (
-        <Pagina titulo='Disciplinas'>
+        <Pagina titulo='Professores'>
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
                     <Form.Control type="text" {...register('nome')} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId='curso'>
-                    <Form.Label >Curso: </Form.Label>
-                    <Form.Control type="text" {...register('curso')} />
+                <Form.Group className="mb-3" controlId='cpf'>
+                    <Form.Label >CPF: </Form.Label>
+                    <Form.Control type="text" {...register('cpf')} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId='matricula'>
+                    <Form.Label >Matrícula: </Form.Label>
+                    <Form.Control type="text" {...register('matricula')} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId='salario'>
+                    <Form.Label >Salário: </Form.Label>
+                    <Form.Control type="text" {...register('salario')} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId='email'>
+                    <Form.Label >Email: </Form.Label>
+                    <Form.Control type="text" {...register('email')} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId='telefone'>
+                    <Form.Label >Telefone: </Form.Label>
+                    <Form.Control type="text" {...register('telefone')} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId='cep'>
+                    <Form.Label >CEP: </Form.Label>
+                    <Form.Control type="text" {...register('cep')} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId='logradouro'>
+                    <Form.Label >Logradouro: </Form.Label>
+                    <Form.Control type="text" {...register('logradouro')} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId='complemento'>
+                    <Form.Label >Complemento: </Form.Label>
+                    <Form.Control type="text" {...register('complemento')} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId='numero'>
+                    <Form.Label >Número: </Form.Label>
+                    <Form.Control type="text" {...register('numero')} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId='bairro'>
+                    <Form.Label >Bairro: </Form.Label>
+                    <Form.Control type="text" {...register('bairro')} />
                 </Form.Group>
 
                 <div className='text-center'>
-                    <Link href='/disciplinas/' className='me-3'>
+                    <Link href='/professores/' className='me-3'>
                         <Button variant="success" onClick={handleSubmit(alterar)}>
-                            <HiCheck />
+                            <HiCheck/>
                             Alterar
                         </Button>
                     </Link>
-                    <Link href='/disciplinas/'>
+                    <Link href='/professores/'>
                         <Button variant='danger'>
-                            <HiArrowNarrowLeft />
+                            <HiArrowNarrowLeft/>
                             Voltar
                         </Button>
                     </Link>
                 </div>
+
             </Form>
         </Pagina>
 

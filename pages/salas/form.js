@@ -15,37 +15,37 @@ const form = () => {
 
     function salvar(dados) {
 
-        axios.post('/api/cursos', dados)
-        push('/cursos')
+        axios.post('/api/salas', dados)
+        push('/salas')
 
     }
 
     return (
-        <Pagina titulo='Cursos'>
+        <Pagina titulo='Salas'>
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
                     <Form.Control type="text" {...register('nome')} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId='duracao'>
-                    <Form.Label >Duração: </Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
+                <Form.Group className="mb-3" controlId='capacidade'>
+                    <Form.Label >Capacidade: </Form.Label>
+                    <Form.Control type="text" {...register('capacidade')} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId='modalidade'>
-                    <Form.Label >Modalidade: </Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
+                <Form.Group className="mb-3" controlId='tipo'>
+                    <Form.Label >Tipo: </Form.Label>
+                    <Form.Control type="text" {...register('tipo')} />
                 </Form.Group>
 
                 <div className='text-center'>
-                    <Link href='/cursos/' className='me-3'>
+                    <Link href='/salas/' className='me-3'>
                         <Button variant="success" onClick={handleSubmit(salvar)}>
                             <HiCheck/>
                             Salvar
                         </Button>
                     </Link>
-                    <Link href='/cursos/'>
+                    <Link href='/salas/'>
                         <Button variant='danger'>
                             <HiArrowNarrowLeft/>
                             Voltar

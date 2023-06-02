@@ -15,37 +15,37 @@ const form = () => {
 
     function salvar(dados) {
 
-        axios.post('/api/cursos', dados)
-        push('/cursos')
+        axios.post('/api/semestres', dados)
+        push('/semestres')
 
     }
 
     return (
-        <Pagina titulo='Cursos'>
+        <Pagina titulo='Semestres'>
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
                     <Form.Control type="text" {...register('nome')} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId='duracao'>
-                    <Form.Label >Duração: </Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
+                <Form.Group className="mb-3" controlId='data_inicio'>
+                    <Form.Label >Inicio: </Form.Label>
+                    <Form.Control type="text" {...register('data_inicio')} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId='modalidade'>
-                    <Form.Label >Modalidade: </Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
+                <Form.Group className="mb-3" controlId='data_fim'>
+                    <Form.Label >Fim: </Form.Label>
+                    <Form.Control type="text" {...register('data_fim')} />
                 </Form.Group>
 
                 <div className='text-center'>
-                    <Link href='/cursos/' className='me-3'>
+                    <Link href='/semestres/' className='me-3'>
                         <Button variant="success" onClick={handleSubmit(salvar)}>
                             <HiCheck/>
                             Salvar
                         </Button>
                     </Link>
-                    <Link href='/cursos/'>
+                    <Link href='/semestres/'>
                         <Button variant='danger'>
                             <HiArrowNarrowLeft/>
                             Voltar

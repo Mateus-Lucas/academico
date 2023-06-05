@@ -10,14 +10,50 @@ import { HiArrowNarrowLeft } from 'react-icons/hi'
 
 const form = () => {
 
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, formState: {errors} } = useForm()
     const { push } = useRouter()
 
     function salvar(dados) {
 
         axios.post('/api/cursos', dados)
-        push('/cursos')
+       push('/cursos')
 
+    }
+
+    const validacaoNome = {
+        required: 'Campo obrigatório',
+        minLength: {
+            value: 3,
+            message: 'O mínimo é 3'
+        },
+        maxLenght: {
+            value: 10,
+            message: 'O máximo é 10'
+        },
+    }
+
+    const validacaoDuracao = {
+        required: 'Campo obrigatório',
+        maxLength: {
+            value: 3,
+            message: 'O máximo é2'
+        },
+        min: {
+            value: 2.5,
+            message: 'O valor mínimo é 2.5'
+        },
+        max: {
+            value: 10,
+            message: 'O valor é máximo é 10'
+        },
+    }
+
+    const validacaoModalidade = {
+        required: 'Campo obrigatório',
+        maxLenght: {
+            value: 10,
+            message: 'O máximo é 10'
+        },
     }
 
     return (
@@ -25,17 +61,29 @@ const form = () => {
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control type="text" {...register('nome', validacaoNome)} />
+                    {
+                        errors.nome && 
+                        <p className='text-danger'>{errors.nome.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='duracao'>
                     <Form.Label >Duração: </Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
+                    <Form.Control type="text" {...register('duracao', validacaoDuracao)} />
+                    {
+                        errors.nome &&
+                        <p className='text-danger'>{errors.nome.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='modalidade'>
                     <Form.Label >Modalidade: </Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
+                    <Form.Control type="text" {...register('modalidade', validacaoModalidade)} />
+                    {
+                        errors.nome &&
+                        <p className='text-danger'>{errors.nome.message}</p>
+                    }
                 </Form.Group>
 
                 <div className='text-center'>

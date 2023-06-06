@@ -35,7 +35,7 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='duracao'>
                     <Form.Label >Duração: </Form.Label>
-                    <Form.Control isInvalid={errors.duracao} isValid={!errors.nome} type="text" {...register('duracao', cursoValidator.duracao)} />
+                    <Form.Control isInvalid={errors.duracao} isValid={!errors.duracao} type="text" {...register('duracao', cursoValidator.duracao)} />
                     {
                         errors.duracao &&
                         <p className='text-danger'>{errors.duracao.message}</p>
@@ -44,7 +44,7 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='modalidade'>
                     <Form.Label >Modalidade: </Form.Label>
-                    <Form.Control isInvalid={errors.modalidade} isValid={!errors.nome} type="text" {...register('modalidade', cursoValidator.modalidade)} />
+                    <Form.Control isInvalid={errors.modalidade} isValid={!errors.modalidade} type="text" {...register('modalidade', cursoValidator.modalidade)} />
                     {
                         errors.modalidade &&
                         <p className='text-danger'>{errors.modalidade.message}</p>

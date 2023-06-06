@@ -3,11 +3,11 @@ const cursoValidator = {
         required: 'Campo obrigatório',
         minLength: {
             value: 3,
-            message: 'O mínimo é 3'
+            message: 'O mínimo de caracteres é 3'
         },
         maxLength: {
             value: 10,
-            message: 'O máximo é 10'
+            message: 'O máximo de caracteres é 10'
         },
     },
 
@@ -29,10 +29,14 @@ const cursoValidator = {
 
     modalidade: {
         required: 'Campo obrigatório',
+        minLength: {
+            value: 3,
+            message: 'O mínimo de caracteres é 3'
+        },
         maxLength: {
             value: 10,
             message: 'O máximo de caracteres é 10'
-        },
+        }
     }
 }
 

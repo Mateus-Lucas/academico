@@ -7,6 +7,7 @@ import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
+import cursoValidator from '@/validators/cursoValidator'
 
 const form = () => {
 
@@ -20,48 +21,12 @@ const form = () => {
 
     }
 
-    const validacaoNome = {
-        required: 'Campo obrigatório',
-        minLength: {
-            value: 3,
-            message: 'O mínimo é 3'
-        },
-        maxLenght: {
-            value: 10,
-            message: 'O máximo é 10'
-        },
-    }
-
-    const validacaoDuracao = {
-        required: 'Campo obrigatório',
-        maxLength: {
-            value: 3,
-            message: 'O máximo é2'
-        },
-        min: {
-            value: 2.5,
-            message: 'O valor mínimo é 2.5'
-        },
-        max: {
-            value: 10,
-            message: 'O valor é máximo é 10'
-        },
-    }
-
-    const validacaoModalidade = {
-        required: 'Campo obrigatório',
-        maxLenght: {
-            value: 10,
-            message: 'O máximo é 10'
-        },
-    }
-
     return (
         <Pagina titulo='Cursos'>
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
-                    <Form.Control type="text" {...register('nome', validacaoNome)} />
+                    <Form.Control isInvalid={errors.nome} isValid={!errors.nome} type="text" {...register('nome', cursoValidator.nome)} />
                     {
                         errors.nome && 
                         <p className='text-danger'>{errors.nome.message}</p>
@@ -70,19 +35,19 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='duracao'>
                     <Form.Label >Duração: </Form.Label>
-                    <Form.Control type="text" {...register('duracao', validacaoDuracao)} />
+                    <Form.Control isInvalid={errors.duracao} isValid={!errors.nome} type="text" {...register('duracao', cursoValidator.duracao)} />
                     {
-                        errors.nome &&
-                        <p className='text-danger'>{errors.nome.message}</p>
+                        errors.duracao &&
+                        <p className='text-danger'>{errors.duracao.message}</p>
                     }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='modalidade'>
                     <Form.Label >Modalidade: </Form.Label>
-                    <Form.Control type="text" {...register('modalidade', validacaoModalidade)} />
+                    <Form.Control isInvalid={errors.modalidade} isValid={!errors.nome} type="text" {...register('modalidade', cursoValidator.modalidade)} />
                     {
-                        errors.nome &&
-                        <p className='text-danger'>{errors.nome.message}</p>
+                        errors.modalidade &&
+                        <p className='text-danger'>{errors.modalidade.message}</p>
                     }
                 </Form.Group>
 

@@ -97,7 +97,7 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='numero'>
                     <Form.Label>Número: </Form.Label>
-                    <Form.Control isInvalid={errors.numero} isValid={!errors.numero} type="text" {...register('numero', alunoValidator.numero)} />
+                    <Form.Control isInvalid={errors.numero} isValid={!errors.numero} type="number" {...register('numero', alunoValidator.numero)} />
                     {
                         errors.numero &&
                         <p className='text-danger'>{errors.numero.message}</p>

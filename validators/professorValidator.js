@@ -2,62 +2,97 @@ const professorValidator = {
     nome: {
         required: 'Campo obrigatório',
         minLength: {
-            value: 3,
-            message: 'O mínimo de caracteres é 3'
+          value: 3,
+          message: 'Minimo de caracteres é 3'
         },
         maxLength: {
-            value: 10,
-            message: 'O máximo de caracteres é 15'
+          value: 20,
+          message: 'Máximo de caracteres é 20'
         },
-    },
-
-    cpf: {
-        required: 'Campo obrigatório',
-        minLength: {
-            value: 9,
-            message: 'Digite 9 caracteres'
-        },
-        maxLength: {
-            value: 9,
-            message: 'Digite 9 caracteres'
+        pattern: {
+          value: /^[A-Za-z\s]+$/,
+          message: 'Digite apenas letras'
         }
-    },
-
-    matricula: {
+      },
+      cpf: {
         required: 'Campo obrigatório',
+        maxLength: {
+          value: 14,
+          message: 'Máximo de caracteres é 14'
         },
-
-    salario: {
-        required: 'Campo obrigatório',
+        minLength: {
+          value: 14,
+          message: 'Mínimo de caracteres é 14'
         },
-    
-    email: {
-        required: 'Campo obrigatório',
-    },
-
-    telefone: {
-        required: 'Campo obrigatório',
+        pattern: {
+          value: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+          message: 'Coloque nessa configuração somente com números 000.000.000-00'
         },
-    
-    cep: {
+      },
+      matricula: {
+          maxLength: {
+              value: 8,
+              message: 'Máximo de caracteres é 8'
+            },
+            minLength: {
+              value: 8,
+              message: 'Mínimo de caracteres é 8'
+            },
         required: 'Campo obrigatório',
-    },
-
-    logradouro: {
+        pattern: {
+           value: /^[A-Z]{2}\d{6}$/,
+           message: 'Coloque nessa configuração XX000000'
+          }
+      },
+      salario: {
         required: 'Campo obrigatório',
+        pattern: {
+          value: /^R\$ \d{1,2}(\.\d{3})$/,
+          message: 'Coloque nessa configuração R$ 00.000'
+        }
+      },
+      email: {
+        required: 'Campo obrigatório',
+        pattern: {
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: 'Email inválido'
+        }
+      },
+      telefone: {
+        required: 'Campo obrigatório',
+        pattern: {
+          value: /^\(\d{2}\) \d{5}-\d{4}$/,
+          message: 'Coloque nessa configuração (00) 00000-0000'
+        }
+      },
+      cep: {
+        required: 'Campo obrigatório',
+        pattern: {
+          value: /^\d{5}-\d{3}$/,
+          message: 'Coloque nessa configuração 00000-000'
         },
-    
-    complemento: {
-        required: 'Campo obrigatório',
-    },
-
-    numero: {
-        required: 'Campo obrigatório',
+        maxLength: {
+          value: 9,
+          message: 'Máximo de caracteres é 9'
         },
-
-    bairro: {
+        minLength: {
+          value: 9,
+          message: 'Minimo de caracteres é 9'
+        }
+      },
+      complemento: {
         required: 'Campo obrigatório',
-        },
-    }
+      },
+      numero: {
+        required: 'Campo obrigatório',
+        maxLength: {
+          value: 2,
+          message: 'Apenas dois caracteres'
+        }
+      },
+      bairro: {
+        required: 'Campo obrigatório',
+      },
+    };
 
 export default professorValidator

@@ -53,7 +53,7 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='salario'>
                     <Form.Label >Salário: </Form.Label>
-                    <Form.Control isInvalid={errors.salario} isValid={!errors.salario} type="text" {...register('salario', professorValidator.matricula)} />
+                    <Form.Control isInvalid={errors.salario} isValid={!errors.salario} type="text" {...register('salario', professorValidator.salario)} />
                     {
                         errors.salario &&
                         <p className='text-danger'>{errors.salario.message}</p>

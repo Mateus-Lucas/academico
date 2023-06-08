@@ -8,11 +8,12 @@ import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
+import cursoValidator from '@/validators/cursoValidator'
 
 const form = () => {
 
     const { push, query } = useRouter()
-    const { register, handleSubmit, setValue } = useForm()
+    const { register, handleSubmit, setValue, formState: {errors} } = useForm()
 
     useEffect(() => {
         if (query.id) {
@@ -36,19 +37,31 @@ const form = () => {
     return (
         <Pagina titulo='Cursos'>
             <Form>
-                <Form.Group className="mb-3" controlId='nome'>
+            <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control isInvalid={errors.nome} isValid={!errors.nome} type="text" {...register('nome', cursoValidator.nome)} />
+                    {
+                        errors.nome && 
+                        <p className='text-danger'>{errors.nome.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='duracao'>
                     <Form.Label >Duração: </Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
+                    <Form.Control isInvalid={errors.duracao} isValid={!errors.duracao} type="text" {...register('duracao', cursoValidator.duracao)} />
+                    {
+                        errors.duracao &&
+                        <p className='text-danger'>{errors.duracao.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='modalidade'>
                     <Form.Label >Modalidade: </Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
+                    <Form.Control isInvalid={errors.modalidade} isValid={!errors.modalidade} type="text" {...register('modalidade', cursoValidator.modalidade)} />
+                    {
+                        errors.modalidade &&
+                        <p className='text-danger'>{errors.modalidade.message}</p>
+                    }
                 </Form.Group>
 
                 <div className='text-center'>

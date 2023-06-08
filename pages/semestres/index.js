@@ -57,8 +57,8 @@ const index = () => {
                   onClick={() => excluir(item.id)} className='text-danger' />
               </td>
               <td>{item.nome}</td>
-              <td>{item.data_inicio}</td>
-              <td>{item.data_fim}</td>
+              <td>{item.inicio}</td>
+              <td>{item.fim}</td>
             </tr>
           ))}
         </tbody>

@@ -8,11 +8,12 @@ import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
+import disciplinaValidator from '@/validators/disciplinaValidator'
 
 const form = () => {
 
     const { push, query } = useRouter()
-    const { register, handleSubmit, setValue } = useForm()
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm()
 
     useEffect(() => {
         if (query.id) {
@@ -36,14 +37,22 @@ const form = () => {
     return (
         <Pagina titulo='Disciplinas'>
             <Form>
-                <Form.Group className="mb-3" controlId='nome'>
+            <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control isInvalid={errors.nome} isValid={!errors.nome} type="text" {...register('nome', disciplinaValidator.nome)} />
+                    {
+                        errors.nome &&
+                        <p className='text-danger'>{errors.nome.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='curso'>
                     <Form.Label >Curso: </Form.Label>
-                    <Form.Control type="text" {...register('curso')} />
+                    <Form.Control isInvalid={errors.curso} isValid={!errors.curso} type="text" {...register('curso', disciplinaValidator.curso)} />
+                    {
+                        errors.curso &&
+                        <p className='text-danger'>{errors.curso.message}</p>
+                    }
                 </Form.Group>
 
                 <div className='text-center'>

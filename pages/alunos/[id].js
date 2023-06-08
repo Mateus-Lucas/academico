@@ -8,11 +8,12 @@ import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
+import alunoValidator from '@/validators/alunoValidator'
 
 const form = () => {
 
     const { push, query } = useRouter()
-    const { register, handleSubmit, setValue } = useForm()
+    const { register, handleSubmit, setValue, formState: {errors} } = useForm()
 
     useEffect(() => {
         if (query.id) {
@@ -38,68 +39,104 @@ const form = () => {
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control isInvalid={errors.nome} isValid={!errors.nome} type="text" {...register('nome', alunoValidator.nome)} />
+                    {
+                        errors.nome &&
+                        <p className='text-danger'>{errors.nome.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='cpf'>
                     <Form.Label >CPF: </Form.Label>
-                    <Form.Control type="text" {...register('cpf')} />
+                    <Form.Control isInvalid={errors.cpf} isValid={!errors.cpf} type="text" {...register('cpf', alunoValidator.cpf)} />
+                    {
+                        errors.cpf &&
+                        <p className='text-danger'>{errors.cpf.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='matricula'>
                     <Form.Label >Matrícula: </Form.Label>
-                    <Form.Control type="text" {...register('matricula')} />
+                    <Form.Control isInvalid={errors.matricula} isValid={!errors.matricula} type="text" {...register('matricula', alunoValidator.matricula)} />
+                    {
+                        errors.matricula &&
+                        <p className='text-danger'>{errors.matricula.message}</p>
+                    }
                 </Form.Group>
-                <Form.Group className="mb-3" controlId='salario'>
-                    <Form.Label >Salário: </Form.Label>
-                    <Form.Control type="text" {...register('salario')} />
-                </Form.Group>
-
                 <Form.Group className="mb-3" controlId='email'>
-                    <Form.Label >Email: </Form.Label>
-                    <Form.Control type="text" {...register('email')} />
+                    <Form.Label>Email: </Form.Label>
+                    <Form.Control isInvalid={errors.email} isValid={!errors.email} type="text" {...register('email', alunoValidator.email)} />
+                    {
+                        errors.email &&
+                        <p className='text-danger'>{errors.email.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='telefone'>
-                    <Form.Label >Telefone: </Form.Label>
-                    <Form.Control type="text" {...register('telefone')} />
+                    <Form.Label>Telefone: </Form.Label>
+                    <Form.Control isInvalid={errors.telefone} isValid={!errors.telefone} type="text" {...register('telefone', alunoValidator.telefone)} />
+                    {
+                        errors.telefone &&
+                        <p className='text-danger'>{errors.telefone.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='cep'>
-                    <Form.Label >CEP: </Form.Label>
-                    <Form.Control type="text" {...register('cep')} />
+                    <Form.Label>CEP: </Form.Label>
+                    <Form.Control isInvalid={errors.cep} isValid={!errors.cep} type="text" {...register('cep', alunoValidator.cep)} />
+                    {
+                        errors.cep &&
+                        <p className='text-danger'>{errors.cep.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='logradouro'>
-                    <Form.Label >Logradouro: </Form.Label>
-                    <Form.Control type="text" {...register('logradouro')} />
+                    <Form.Label>Logradouro: </Form.Label>
+                    <Form.Control isInvalid={errors.logradouro} isValid={!errors.logradouro} type="text" {...register('logradouro', alunoValidator.logradouro)} />
+                    {
+                        errors.logradouro &&
+                        <p className='text-danger'>{errors.logradouro.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='complemento'>
-                    <Form.Label >Complemento: </Form.Label>
-                    <Form.Control type="text" {...register('complemento')} />
+                    <Form.Label>Complemento: </Form.Label>
+                    <Form.Control isInvalid={errors.complemento} isValid={!errors.complemento} type="text" {...register('complemento', alunoValidator.complemento)} />
+                    {
+                        errors.complemento &&
+                        <p className='text-danger'>{errors.complemento.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='numero'>
-                    <Form.Label >Número: </Form.Label>
-                    <Form.Control type="text" {...register('numero')} />
+                    <Form.Label>Número: </Form.Label>
+                    <Form.Control isInvalid={errors.numero} isValid={!errors.numero} type="number" {...register('numero', alunoValidator.numero)} />
+                    {
+                        errors.numero &&
+                        <p className='text-danger'>{errors.numero.message}</p>
+                    }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId='bairro'>
-                    <Form.Label >Bairro: </Form.Label>
-                    <Form.Control type="text" {...register('bairro')} />
+                    <Form.Label>Bairro: </Form.Label>
+                    <Form.Control isInvalid={errors.bairro} isValid={!errors.bairro} type="text" {...register('bairro', alunoValidator.bairro)} />
+                    {
+                        errors.bairro &&
+                        <p className='text-danger'>{errors.bairro.message}</p>
+                    }
                 </Form.Group>
+
 
                 <div className='text-center'>
                     <Link href='/alunos/' className='me-3'>
                         <Button variant="success" onClick={handleSubmit(alterar)}>
-                            <HiCheck/>
-                            Alterar
+                            <HiCheck />
+                            Salvar
                         </Button>
                     </Link>
                     <Link href='/alunos/'>
                         <Button variant='danger'>
-                            <HiArrowNarrowLeft/>
+                            <HiArrowNarrowLeft />
                             Voltar
                         </Button>
                     </Link>

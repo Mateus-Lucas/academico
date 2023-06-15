@@ -8,10 +8,11 @@ import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
 import salaValidator from '@/validators/salaValidator'
+import { mask } from 'remask'
 
 const form = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm()
     const { push } = useRouter()
 
     function salvar(dados) {
@@ -21,12 +22,24 @@ const form = () => {
 
     }
 
+    function handleChange(event) {
+        const name = event.target.name
+        const valor = event.target.value
+        const mascara = event.target.getAttribute('mask')
+
+        setValue(name, mask(valor, mascara));
+    }
+
     return (
         <Pagina titulo='Salas'>
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
-                    <Form.Control isInvalid={errors.nome} isValid={!errors.nome} type="text" {...register('nome', salaValidator.nome)} />
+                    <Form.Control
+                        isInvalid={errors.nome}
+                        isValid={!errors.nome}
+                        type="text"
+                        {...register('nome', salaValidator.nome)} />
                     {
                         errors.nome &&
                         <p className='text-danger'>{errors.nome.message}</p>
@@ -35,7 +48,14 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='capacidade'>
                     <Form.Label >Capacidade: </Form.Label>
-                    <Form.Control isInvalid={errors.capacidade} isValid={!errors.capacidade} type="text" {...register('capacidade', salaValidator.capacidade)} />
+                    <Form.Control
+                        mask='99'
+                        isInvalid={errors.capacidade}
+                        isValid={!errors.capacidade}
+                        type="text"
+                        {...register('capacidade', salaValidator.capacidade)}
+                        onChange={handleChange}
+                    />
                     {
                         errors.capacidade &&
                         <p className='text-danger'>{errors.capacidade.message}</p>
@@ -44,7 +64,11 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='tipo'>
                     <Form.Label >Tipo: </Form.Label>
-                    <Form.Control isInvalid={errors.tipo} isValid={!errors.tipo} type="text" {...register('tipo', salaValidator.tipo)} />
+                    <Form.Control 
+                    isInvalid={errors.tipo}
+                     isValid={!errors.tipo} 
+                     type="text" 
+                     {...register('tipo', salaValidator.tipo)} />
                     {
                         errors.tipo &&
                         <p className='text-danger'>{errors.tipo.message}</p>

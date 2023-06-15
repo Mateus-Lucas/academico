@@ -13,15 +13,10 @@ const salaValidator = {
 
     capacidade: {
         required: 'Campo obrigatório',
-        maxLength: {
-            value: 3,
-            message: 'Digite no máximo 3 caracteres'
-        },
-        pattern: {
-            value: /^[0-9]+$/,
-            message: 'Digite apenas números'
+        max: {
+            value: 70,
+            message: 'Capacidade máxima de 70 pessoas'
         }
-            
     },
 
     tipo: {

@@ -39,7 +39,11 @@ const form = () => {
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
-                    <Form.Control isInvalid={errors.nome} isValid={!errors.nome} type="text" {...register('nome', semestreValidator.nome)} />
+                    <Form.Control
+                        isInvalid={errors.nome}
+                        isValid={!errors.nome}
+                        type="text"
+                        {...register('nome', semestreValidator.nome)} />
                     {
                         errors.nome &&
                         <p className='text-danger'>{errors.nome.message}</p>
@@ -48,7 +52,12 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='inicio'>
                     <Form.Label >Inicio: </Form.Label>
-                    <Form.Control isInvalid={errors.inicio} isValid={!errors.inicio} type="text" {...register('inicio', semestreValidator.inicio)} />
+                    <Form.Control
+                        isInvalid={errors.inicio}
+                        isValid={!errors.inicio}
+                        type="date"
+                        {...register('inicio', semestreValidator.inicio)} 
+                        />
                     {
                         errors.inicio &&
                         <p className='text-danger'>{errors.inicio.message}</p>
@@ -57,12 +66,18 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='fim'>
                     <Form.Label >fim: </Form.Label>
-                    <Form.Control isInvalid={errors.fim} isValid={!errors.fim} type="text" {...register('fim', semestreValidator.fim)} />
+                    <Form.Control
+                        isInvalid={errors.fim}
+                        isValid={!errors.fim}
+                        type="date"
+                        {...register('fim', semestreValidator.fim)} 
+                        />
                     {
                         errors.fim &&
                         <p className='text-danger'>{errors.fim.message}</p>
                     }
                 </Form.Group>
+
                 <div className='text-center'>
                     <Link href='/semestres/' className='me-3'>
                         <Button variant="success" onClick={handleSubmit(alterar)}>
@@ -77,6 +92,7 @@ const form = () => {
                         </Button>
                     </Link>
                 </div>
+
             </Form>
         </Pagina>
 

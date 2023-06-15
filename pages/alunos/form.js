@@ -156,7 +156,7 @@ const form = () => {
                     mask='99'
                     isInvalid={errors.numero} 
                     isValid={!errors.numero} 
-                    type="number" 
+                    type="text" 
                     {...register('numero', alunoValidator.numero)} 
                     onChange={handleChange}
                     />

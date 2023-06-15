@@ -8,10 +8,11 @@ import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
 import alunoValidator from '@/validators/alunoValidator'
+import { mask } from 'remask';
 
 const form = () => {
 
-    const { register, handleSubmit, formState: {errors} } = useForm()
+    const { register, handleSubmit, formState: {errors}, setValue } = useForm()
     const { push } = useRouter()
 
     function salvar(dados) {
@@ -19,6 +20,14 @@ const form = () => {
         axios.post('/api/alunos', dados)
         push('/alunos')
 
+    }
+
+    function handleChange(event) {
+        const name = event.target.name
+        const valor = event.target.value
+        const mascara = event.target.getAttribute('mask')
+
+        setValue(name, mask(valor, mascara));
     }
 
     return (
@@ -35,7 +44,14 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='cpf'>
                     <Form.Label >CPF: </Form.Label>
-                    <Form.Control isInvalid={errors.cpf} isValid={!errors.cpf} type="text" {...register('cpf', alunoValidator.cpf)} />
+                    <Form.Control 
+                    mask='999.999.999-99'
+                    isInvalid={errors.cpf} 
+                    isValid={!errors.cpf}
+                     type="text" 
+                     {...register('cpf', alunoValidator.cpf)}
+                    onChange={handleChange}
+                    />
                     {
                         errors.cpf &&
                         <p className='text-danger'>{errors.cpf.message}</p>
@@ -44,7 +60,14 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='matricula'>
                     <Form.Label >Matrícula: </Form.Label>
-                    <Form.Control isInvalid={errors.matricula} isValid={!errors.matricula} type="text" {...register('matricula', alunoValidator.matricula)} />
+                    <Form.Control 
+                    mask='9-9999'
+                    isInvalid={errors.matricula}
+                     isValid={!errors.matricula} 
+                     type="text" 
+                     {...register('matricula', alunoValidator.matricula)} 
+                     onChange={handleChange}
+                     />
                     {
                         errors.matricula &&
                         <p className='text-danger'>{errors.matricula.message}</p>
@@ -52,7 +75,13 @@ const form = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId='email'>
                     <Form.Label>Email: </Form.Label>
-                    <Form.Control isInvalid={errors.email} isValid={!errors.email} type="text" {...register('email', alunoValidator.email)} />
+                    <Form.Control 
+                    mask='(99) 9.9999-9999'
+                    isInvalid={errors.email} 
+                    isValid={!errors.email} 
+                    type="text"
+                     {...register('email', alunoValidator.email)} 
+                     />
                     {
                         errors.email &&
                         <p className='text-danger'>{errors.email.message}</p>
@@ -61,7 +90,14 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='telefone'>
                     <Form.Label>Telefone: </Form.Label>
-                    <Form.Control isInvalid={errors.telefone} isValid={!errors.telefone} type="text" {...register('telefone', alunoValidator.telefone)} />
+                    <Form.Control
+                    mask='(99) 9.9999-9999'
+                     isInvalid={errors.telefone}
+                      isValid={!errors.telefone} 
+                      type="text" 
+                      {...register('telefone', alunoValidator.telefone)} 
+                      onChange={handleChange}
+                      />
                     {
                         errors.telefone &&
                         <p className='text-danger'>{errors.telefone.message}</p>
@@ -70,7 +106,14 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='cep'>
                     <Form.Label>CEP: </Form.Label>
-                    <Form.Control isInvalid={errors.cep} isValid={!errors.cep} type="text" {...register('cep', alunoValidator.cep)} />
+                    <Form.Control
+                    mask='99999-999'
+                     isInvalid={errors.cep}
+                      isValid={!errors.cep} 
+                      type="text" 
+                      {...register('cep', alunoValidator.cep)} 
+                      onChange={handleChange}
+                      />
                     {
                         errors.cep &&
                         <p className='text-danger'>{errors.cep.message}</p>
@@ -79,7 +122,11 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='logradouro'>
                     <Form.Label>Logradouro: </Form.Label>
-                    <Form.Control isInvalid={errors.logradouro} isValid={!errors.logradouro} type="text" {...register('logradouro', alunoValidator.logradouro)} />
+                    <Form.Control
+                     isInvalid={errors.logradouro} 
+                     isValid={!errors.logradouro}
+                      type="text" 
+                      {...register('logradouro', alunoValidator.logradouro)} />
                     {
                         errors.logradouro &&
                         <p className='text-danger'>{errors.logradouro.message}</p>
@@ -88,7 +135,11 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='complemento'>
                     <Form.Label>Complemento: </Form.Label>
-                    <Form.Control isInvalid={errors.complemento} isValid={!errors.complemento} type="text" {...register('complemento', alunoValidator.complemento)} />
+                    <Form.Control
+                     isInvalid={errors.complemento}
+                      isValid={!errors.complemento} 
+                      type="text" 
+                      {...register('complemento', alunoValidator.complemento)} />
                     {
                         errors.complemento &&
                         <p className='text-danger'>{errors.complemento.message}</p>
@@ -97,7 +148,14 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='numero'>
                     <Form.Label>Número: </Form.Label>
-                    <Form.Control isInvalid={errors.numero} isValid={!errors.numero} type="number" {...register('numero', alunoValidator.numero)} />
+                    <Form.Control 
+                    mask='99'
+                    isInvalid={errors.numero} 
+                    isValid={!errors.numero} 
+                    type="number" 
+                    {...register('numero', alunoValidator.numero)} 
+                    onChange={handleChange}
+                    />
                     {
                         errors.numero &&
                         <p className='text-danger'>{errors.numero.message}</p>
@@ -106,7 +164,11 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='bairro'>
                     <Form.Label>Bairro: </Form.Label>
-                    <Form.Control isInvalid={errors.bairro} isValid={!errors.bairro} type="text" {...register('bairro', alunoValidator.bairro)} />
+                    <Form.Control 
+                    isInvalid={errors.bairro} 
+                    isValid={!errors.bairro}
+                     type="text" 
+                     {...register('bairro', alunoValidator.bairro)} />
                     {
                         errors.bairro &&
                         <p className='text-danger'>{errors.bairro.message}</p>

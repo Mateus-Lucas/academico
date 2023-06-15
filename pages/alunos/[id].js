@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import { HiCheck } from 'react-icons/hi'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
 import alunoValidator from '@/validators/alunoValidator'
+import { mask } from 'remask';
 
 const form = () => {
 
@@ -33,6 +34,14 @@ const form = () => {
         axios.put('/api/alunos/' + query.id, dados)
         push('/alunos')
     }
+    
+    function handleChange(event) {
+        const name = event.target.name
+        const valor = event.target.value
+        const mascara = event.target.getAttribute('mask')
+
+        setValue(name, mask(valor, mascara));
+    }
 
     return (
         <Pagina titulo='alunos'>
@@ -48,7 +57,14 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId='cpf'>
                     <Form.Label >CPF: </Form.Label>
-                    <Form.Control isInvalid={errors.cpf} isValid={!errors.cpf} type="text" {...register('cpf', alunoValidator.cpf)} />
+                    <Form.Control 
+                    mask='999.999.999-99'
+                    isInvalid={errors.cpf} 
+                    isValid={!errors.cpf}
+                     type="text" 
+                     {...register('cpf', alunoValidator.cpf)}
+                    onChange={handleChange}
+                    />
                     {
                         errors.cpf &&
                         <p className='text-danger'>{errors.cpf.message}</p>

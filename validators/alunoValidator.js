@@ -23,8 +23,8 @@ const alunoValidator = {
   },
   matricula: {
     minLength: {
-      value: 8,
-      message: 'Mínimo de caracteres é 8'
+      value: 6,
+      message: 'Mínimo de caracteres é 6'
     },
     required: 'Campo obrigatório',
   },

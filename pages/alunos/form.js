@@ -35,7 +35,11 @@ const form = () => {
             <Form>
                 <Form.Group className="mb-3" controlId='nome'>
                     <Form.Label >Nome: </Form.Label>
-                    <Form.Control isInvalid={errors.nome} isValid={!errors.nome} type="text" {...register('nome', alunoValidator.nome)} />
+                    <Form.Control
+                     isInvalid={errors.nome}
+                      isValid={!errors.nome} 
+                      type="text"
+                       {...register('nome', alunoValidator.nome)} />
                     {
                         errors.nome &&
                         <p className='text-danger'>{errors.nome.message}</p>
